@@ -10,16 +10,26 @@ CORS(app)
 def index():
     return render_template('index.html')
 
-@app.route('/upload',
-methods = ['POST'])
-@cross_origin(origin='*', methods=['POST'], headers=['Content-Type'])
+@app.route('/upload', methods=['POST'])
 def upload():
-    file=request.files['fileToUpload']
+    file = request.files['file']
     if file:
+        filename = file.filename
+        file.save("/tmp", filename)
+        return 'Файл успешно загружен на сервер'
+    else:
+        return 'Файл не найден'
+#@app.route('/upload',
+           
+#methods = ['POST'])
+#@cross_origin(origin='*', methods=['POST'], headers=['Content-Type'])
+#def upload():
+#    file=request.files['fileToUpload']
+#    if file:
         filename=file.filename; file.save(os.path.join('/tmp', filename))
         # Изменить путь при размещении в продакшн
         return 'Файл {} успешно загружен на сервер'.format(filename)
-    else:
+ #   else:
         return 'Файл не найден'
 
 
