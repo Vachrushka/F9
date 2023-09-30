@@ -12,7 +12,7 @@ def upload():
     file = request.files['fileToUpload']
     if file:
         filename = file.filename
-        file.save(os.path.join('/tmp', filename))
+        file.save(os.path.join('D:\Git\F9\F9\tmp', filename))
        # file.save("/tmp", filename)
         return 'Файл успешно загружен на сервер'
     else:
